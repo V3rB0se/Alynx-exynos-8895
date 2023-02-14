@@ -109,12 +109,16 @@
 #include <bcmdevs.h>
 #endif /* DHD_SSSR_DUMP */
 
+#if 0
 int dhd_msg_level = DHD_ERROR_VAL | DHD_FWLOG_VAL | DHD_EVENT_VAL
 	/* For CUSTOMER_HW4 do not enable DHD_IOVAR_MEM_VAL by default */
 #if !defined(CUSTOMER_HW4)
 	| DHD_IOVAR_MEM_VAL
 #endif /* !defined(CUSTOMER_HW4) */
 	| DHD_PKT_MON_VAL;
+#else
+int dhd_msg_level = 0;
+#endif
 
 #if defined(WL_WIRELESS_EXT)
 #include <wl_iw.h>
@@ -3836,7 +3840,7 @@ dhd_pktfilter_offload_set(dhd_pub_t * dhd, char *arg)
 					htod16(WL_PKT_FILTER_MFLAG_NEG);
 				(argv[i])++;
 			}
-			if (argv[i] == NULL) {
+			if (*argv[i] == '\0') {
 				printf("Pattern not provided\n");
 				goto fail;
 			}

@@ -136,7 +136,11 @@
 
 static struct device *cfg80211_parent_dev = NULL;
 static struct bcm_cfg80211 *g_bcmcfg = NULL;
+#if 0
 u32 wl_dbg_level = WL_DBG_ERR | WL_DBG_P2P_ACTION | WL_DBG_INFO;
+#else
+u32 wl_dbg_level = 0;
+#endif
 
 #define	MAX_VIF_OFFSET	15
 #define MAX_WAIT_TIME 1500
@@ -4742,9 +4746,12 @@ static s32
 wl_role_to_cfg80211_type(uint16 role, uint16 *wl_iftype, uint16 *mode)
 {
 	switch (role) {
+#if 0
+	case WLC_E_IF_ROLE_AWDL: /* Does not exist in bcmevent.h */
 		*wl_iftype = WL_IF_TYPE_AWDL;
 		*mode = WL_MODE_AWDL;
 		return NL80211_IFTYPE_STATION;
+#endif
 	case WLC_E_IF_ROLE_STA:
 		*wl_iftype = WL_IF_TYPE_STA;
 		*mode = WL_MODE_BSS;

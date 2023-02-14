@@ -6270,7 +6270,7 @@ wl_android_get_lqcm_report(struct net_device *dev, char *command, int total_len)
 {
 	int bytes_written, err = 0;
 	uint32 lqcm_report = 0;
-	uint32 lqcm_enable, tx_lqcm_idx, rx_lqcm_idx;
+	uint32 lqcm_enable = 0, tx_lqcm_idx = 0, rx_lqcm_idx = 0;
 
 	err = wldev_iovar_getint(dev, "lqcm", &lqcm_report);
 	if (err != BCME_OK) {
@@ -7104,7 +7104,7 @@ wl_android_set_adps_mode(struct net_device *dev, const char* string_num)
 	adps_mode = bcm_atoi(string_num);
 	WL_ERR(("%s: SET_ADPS %d\n", __FUNCTION__, adps_mode));
 
-	if ((adps_mode < 0) || (1 < adps_mode)) {
+	if ((adps_mode < 0) && (1 < adps_mode)) {
 		WL_ERR(("%s: Invalid value %d.\n", __FUNCTION__, adps_mode));
 		return -EINVAL;
 	}
