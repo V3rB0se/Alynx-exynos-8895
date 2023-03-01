@@ -5,6 +5,9 @@ JOBS=2
 lcyan='\e[96m'
 reset='\e[0m'
 
+export ANDROID_MAJOR_VERSION=p
+export PLATFORM_VERSION=9.0.0
+
 ## Lineage 20
 
 # SETUP BUILD
